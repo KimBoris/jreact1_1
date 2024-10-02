@@ -15,6 +15,26 @@ function KioskMain2() {
 
     const [cartItems, setCartItems] = useState([])
 
+    const changeCartItem = (pid, amount) => {
+
+        const target = cartItems.find(item => item.product.pid === pid);
+
+        if (!target) {
+            return;
+        }
+
+        target.qty += amount
+
+        if(target.qty <= 0)
+        {
+            const filtered = cartItems.filter(item => item.product.pid !== parseInt(pid))
+            setCartItems([...filtered])
+            return;
+        }
+
+        setCartItems([...cartItems])
+    }
+
     const addToCart = (product) => {
 
         const target = cartItems.find(item => {
@@ -26,8 +46,7 @@ function KioskMain2() {
         if (!target) {
             setCartItems([...cartItems, {product: product, qty: 1}])
             return;
-        }
-        else {
+        } else {
             target.qty += 1
             setCartItems([...cartItems])
         }
@@ -41,7 +60,7 @@ function KioskMain2() {
             </div>
 
             <div className='border-2 w-1/3'>
-                <CartDiv2 cartItems={cartItems}></CartDiv2>
+                <CartDiv2 cartItems={cartItems} changeCartItem={changeCartItem}></CartDiv2>
             </div>
         </div>
     );

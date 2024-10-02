@@ -1,9 +1,10 @@
-import KioskMain from "./components/kiosk/KioskMain.jsx";
+
+import KioskMain2 from "./components/kiosktest/KioskMain2.jsx";
 
 function App() {
 
   return (
-       <KioskMain></KioskMain>
+       <KioskMain2></KioskMain2>
   )
 }
 
